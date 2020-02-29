@@ -3,7 +3,7 @@ from os.path import splitext
 from glob import glob
 import os
 
-images = glob("./*.jpg")
+images = glob("./*.jpg") + glob("./*.png")
 
 try:
     os.mkdir("./out")
