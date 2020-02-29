@@ -9,4 +9,5 @@ Drop Image files into folder root.
 python 'Remove Metadata.py'
 ```
 
-or just click script file!
+or just click script file
+or Drag & Drop images to Batch file
