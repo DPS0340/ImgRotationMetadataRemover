@@ -2,16 +2,18 @@ from PIL import Image, ExifTags
 from os.path import splitext
 from glob import glob
 import os
+import sys
 
-images = glob("./*.jpg") + glob("./*.png")
+filePath = os.path.dirname(sys.argv[0])
 
-try:
-    os.mkdir("./out")
-except:
-    pass
+images = glob(filePath + "/*.jpg") + glob(filePath + "/*.png")
+
+
+if not os.path.exists(filePath + "/out"):
+    os.mkdir(filePath + "/out")
 
 for i in images:
-    print("Now processing %s." %i)
+    print("Now processing %s." % os.path.basename(i))
     try:
         image=Image.open(i)
         for orientation in ExifTags.TAGS.keys():
@@ -25,13 +27,13 @@ for i in images:
             image=image.rotate(270, expand=True)
         elif exif[orientation] == 8:
             image=image.rotate(90, expand=True)
-        head, tail = splitext(i)
-        out = "./out/" + head.replace(".", "", 1) + tail
+        out = filePath + "/out/" + os.path.basename(i)
         image.save(out)
         image.close()
     except (AttributeError, KeyError, IndexError):
         image=Image.open(i)
-        head, tail = splitext(i)
-        out = "./out/" + head.replace(".", "", 1) + tail
+        out = filePath + "/out/" + os.path.basename(i)
         image.save(out)
         image.close()
+    finally:
+        print("%s Done!" % os.path.basename(i))
