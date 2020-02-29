@@ -36,4 +36,5 @@ for i in images:
         image.save(out)
         image.close()
     finally:
+        os.remove(i)
         print("%s Done!" % os.path.basename(i))
