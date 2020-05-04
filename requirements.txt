@@ -2,4 +2,4 @@
 # https://github.com/damnever/pigar
 
 # remove metadata.py: 1
-Pillow == 6.2.1
+Pillow >= 6.2.2
